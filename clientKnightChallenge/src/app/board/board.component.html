@@ -1,10 +1,14 @@
-    <div class="board">
-      <div class="row-container" *ngFor="let row of boardArray;let rowIndex=index">
-
-        <div [className]="isBlack(rowIndex,colIndex)? 'black col-container' :'white col-container'"
+    <div cdkDropList   class="board">
+      <div  (cdkDropListDropped)="dragAndDrop($event)"  class="row-container" *ngFor="let row of boardArray;let rowIndex=index">
+  
+        <div  attr.id="{{rowIndex}},{{colIndex}}"  [className]="isBlack(rowIndex,colIndex)? 'black col-container' :'white col-container'"
           *ngFor="let col of row;let colIndex=index">
-          {{rowIndex}} ,{{colIndex}}
+           <div cdkDrag *ngIf="knightCord.col==colIndex && knightCord.row==rowIndex"  class="knight" >
+        <img >
+
         </div>
-
-
       </div>
+
+   
+
+    
