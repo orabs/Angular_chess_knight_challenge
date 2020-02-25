@@ -6,17 +6,17 @@
 >
     </div>
   <div id="{{i}}" class="example-wrapper-box" cdkDropList *ngFor="let item of items;let i=index"
-    [cdkDropListEnterPredicate]="enter"
+    
     (cdkDropListDropped)="drop($event)" (CdkDropList)="dragStart($event)">
     <div  cdkDrag
       [className]="isBlack(i)? 'black example-box' :'white example-box'"
     >
      {{i}}
     </div>
-        <div 
+        <img src="../../assets/images/3dKnight2.png" 
     
       *ngIf="knightCord.col==getCord(i).col && knightCord.row==getCord(i).row"
       cdkDrag class="knight" >
-    </div>
+    <!-- </div> -->
   </div>
 </div>

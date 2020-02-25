@@ -14,7 +14,11 @@ import { HostListener } from '@angular/core';
   styleUrls: ['./board.component.scss']
 })
 export class BoardComponent implements OnInit {
-  boardArray = Array(8).fill(0).map(() => Array(8).fill(0));
+  // boardArray:any = Array(8).fill(0).map(() => Array(8).fill(0));
+  boardArray:any = Array(64).fill(0)
+
+
+
 
   knightCord: Cord = {
     col: 2,
@@ -27,26 +31,45 @@ export class BoardComponent implements OnInit {
 
   ngOnInit() {
 
+    for (let i=0;i<this.boardArray.length;i++) {
+
+      this.boardArray[i]=i
+
+    }
+    console.log(this.boardArray)
+
   }
 
-  isBlack(col, row) {
-    return (col % 2 == 0 && row % 2 != 0 || row % 2 == 0 && col % 2 != 0)
+  isBlack(col) {
+    let row = Math.floor(col/8)
+    // console.log(col)
+    // console.log(row)
+    // console.log((col + row) % 2 == 0)
+    return ((col+row) % 2==0)
   }
 
 
-  dragAndDrop(event:CdkDragDrop<number>) {
+  drop(event: CdkDragDrop<string[]>) {
     console.log(event)
-    moveItemInArray(this.boardArray,event.previousIndex,event.currentIndex);
-
+    moveItemInArray(this.boardArray, event.previousIndex, event.currentIndex);
   }
 
-  @HostListener('document:mouseup', ['$event'])
-  mouseRelease(event){
-    console.log(event)
-    console.log(event.target.attributes)
-    console.log(event.target.attributes.id)
 
+  getCord(index):Cord {
+
+    let row = Math.floor(index / 8)
+    let col = index-(row*8)
+    let requiredCord:Cord={col:col,row:row}
+    return requiredCord
   }
+
+  // @HostListener('document:mouseup', ['$event'])
+  // mouseRelease(event){
+  //   console.log(event)
+  //   console.log(event.target.attributes)
+  //   console.log(event.target.attributes.id)
+
+  // }
   
 
 

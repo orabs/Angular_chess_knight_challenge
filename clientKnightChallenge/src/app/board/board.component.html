@@ -1,12 +1,14 @@
-    <div cdkDropList   class="board">
-      <div  (cdkDropListDropped)="dragAndDrop($event)"  class="row-container" *ngFor="let row of boardArray;let rowIndex=index">
-  
-        <div  attr.id="{{rowIndex}},{{colIndex}}"  [className]="isBlack(rowIndex,colIndex)? 'black col-container' :'white col-container'"
-          *ngFor="let col of row;let colIndex=index">
-           <div cdkDrag *ngIf="knightCord.col==colIndex && knightCord.row==rowIndex"  class="knight" >
-        <img >
+    <div cdkDropList (cdkDropListDropped)="drop($event)" class="board">
+      <!-- <div cdkDropList  (cdkDropListDropped)="drop($event)" 
+         class="row-container" *ngFor="let row of boardArray;let rowIndex=index"> -->
+         
+        <div cdkDrag   attr.id="{{getCord(colIndex).col}},{{getCord(colIndex).row}}"  [className]="isBlack(colIndex)? 'black col-container' :'white col-container'"
+          *ngFor="let col of boardArray;let colIndex=index"
+               >{{getCord(colIndex).col}},{{getCord(colIndex).row}}        
+           <!-- <div cdkDrag *ngIf="knightCord.col==getCord(colIndex).col && knightCord.row==getCord(colIndex).row"  class="knight" > -->
+      
 
-        </div>
+        <!-- </div> -->
       </div>
 
    

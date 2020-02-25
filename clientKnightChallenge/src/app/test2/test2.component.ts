@@ -85,33 +85,44 @@ export class Test2Component implements OnInit {
     phElement.parentNode.removeChild(phElement);
   }
 
-
   drop(event) {
-    if (!this.target)
-      return;
 
-    let phElement = this.placeholder.element.nativeElement;
-    // console.log(phElement)
-    let parent = phElement.parentNode;
+    console.log(event)
+   if (this.isPossibleMove(event.container.id)) {
+      // moveItemInArray(this.items, this.sourceIndex, this.targetIndex);
+     let currentCord = this.getCord(event.container.id)
 
-    phElement.style.display = 'none';
-
-    parent.removeChild(phElement);
-    parent.appendChild(phElement);
-    parent.insertBefore(this.source.element.nativeElement, parent.children[this.sourceIndex]);
-    let newCord = this.getCord(this.targetIndex)
-
-    this.target = null;
-    this.source = null;
-
-    if (this.sourceIndex != this.targetIndex && this.isPossibleMove(this.targetIndex)) {
-      moveItemInArray(this.items, this.sourceIndex, this.targetIndex);
-
-      this.knightCord.row = newCord.row
-      this.knightCord.col = newCord.col
+     this.knightCord.row = currentCord.row
+     this.knightCord.col = currentCord.col
     }
-
   }
+
+  // drop(event) {
+  //   if (!this.target)
+  //     return;
+    
+  //   let phElement = this.placeholder.element.nativeElement;
+  //   // console.log(phElement)
+  //   let parent = phElement.parentNode;
+
+  //   phElement.style.display = 'none';
+
+  //   parent.removeChild(phElement);
+  //   parent.appendChild(phElement);
+  //   parent.insertBefore(this.source.element.nativeElement, parent.children[this.sourceIndex]);
+  //   let newCord = this.getCord(this.targetIndex)
+
+  //   this.target = null;
+  //   this.source = null;
+
+  //   if (this.sourceIndex != this.targetIndex && this.isPossibleMove(this.targetIndex)) {
+  //     moveItemInArray(this.items, this.sourceIndex, this.targetIndex);
+
+  //     this.knightCord.row = newCord.row
+  //     this.knightCord.col = newCord.col
+  //   }
+
+  // }
 
   enter = (drag: CdkDrag, drop: CdkDropList) => {
 
