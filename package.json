@@ -1,0 +1,23 @@
+{
+    "name": "server-authentication",
+    "version": "0.0.0",
+    "description": "ServerAuthentication",
+    "main": "app.ts",
+    "author": {
+        "name": ""
+    },
+    "devDependencies": {
+        "@types/express-jwt": "0.0.40"
+    },
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "typescript": "^3.2.4"
+    },
+    "scripts": {
+        "start": "ts-node app.ts",
+        "build": "tsc",
+        "debug": "tsnd --inspect --respawn app.ts"
+    }
+}
