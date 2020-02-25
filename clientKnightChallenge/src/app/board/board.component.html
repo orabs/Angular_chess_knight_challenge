@@ -1,16 +1,16 @@
-    <div cdkDropList (cdkDropListDropped)="drop($event)" class="board">
-      <!-- <div cdkDropList  (cdkDropListDropped)="drop($event)" 
-         class="row-container" *ngFor="let row of boardArray;let rowIndex=index"> -->
-         
-        <div cdkDrag   attr.id="{{getCord(colIndex).col}},{{getCord(colIndex).row}}"  [className]="isBlack(colIndex)? 'black col-container' :'white col-container'"
-          *ngFor="let col of boardArray;let colIndex=index"
-               >{{getCord(colIndex).col}},{{getCord(colIndex).row}}        
-           <!-- <div cdkDrag *ngIf="knightCord.col==getCord(colIndex).col && knightCord.row==getCord(colIndex).row"  class="knight" > -->
-      
+<!-- <h1>Drag&Drop Chess knight</h1> -->
 
-        <!-- </div> -->
-      </div>
-
-   
-
-    
+<div class="main-container" cdkDropListGroup >
+      <div id="{{i}}" cdkDropList *ngFor="let item of items;let i=index"
+        (cdkDropListDropped)="drop($event)" (CdkDropList)="dragStart($event)">
+    <div  cdkDrag
+      [className]="isBlack(i)? 'black col-box' :'white col-box'"
+    >
+     {{i}}
+    </div>
+        <img src="../../assets/images/3dKnight2.png" 
+      *ngIf="knightCord.col==getCord(i).col && knightCord.row==getCord(i).row"
+      cdkDrag class="knight" >
+  
+  </div>
+</div>

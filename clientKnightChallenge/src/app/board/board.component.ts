@@ -1,12 +1,21 @@
 import {
   Component,
-  OnInit
+  OnInit,
 } from '@angular/core';
+import {
+  CdkDrag,
+  CdkDropList,
+  moveItemInArray,
+  CdkDropListContainer,
+  CdkDropListGroup,
+  CdkDragSortEvent
+} from '@angular/cdk/drag-drop';
 import {
   Cord
 } from 'src/Cord';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { HostListener } from '@angular/core';
+import {
+  ApiService
+} from 'src/services/api.service';
 
 @Component({
   selector: 'app-board',
@@ -14,64 +23,68 @@ import { HostListener } from '@angular/core';
   styleUrls: ['./board.component.scss']
 })
 export class BoardComponent implements OnInit {
-  // boardArray:any = Array(8).fill(0).map(() => Array(8).fill(0));
-  boardArray:any = Array(64).fill(0)
 
-
-
+  public items = Array(64).fill(0)
 
   knightCord: Cord = {
     col: 2,
     row: 3
   }
+  constructor(public api: ApiService) {
+    for (let i = 0; i < 64; i++) {
+      this.items[i] = i
+    }
 
-  constructor() {
+  }
+  ngOnInit() {
 
   }
 
-  ngOnInit() {
 
-    for (let i=0;i<this.boardArray.length;i++) {
-
-      this.boardArray[i]=i
-
-    }
-    console.log(this.boardArray)
+  isPossibleMove(index) {
+    let targetCord: Cord = this.getCord(index)
+    let rowDiff = Math.abs(this.knightCord.row - targetCord.row)
+    let colDiff = Math.abs(this.knightCord.col - targetCord.col)
+    return rowDiff && colDiff && (colDiff + rowDiff == 3)
 
   }
 
   isBlack(col) {
-    let row = Math.floor(col/8)
-    // console.log(col)
-    // console.log(row)
-    // console.log((col + row) % 2 == 0)
-    return ((col+row) % 2==0)
+    let row = Math.floor(col / 8)
+    return ((col + row) % 2 == 0)
   }
 
-
-  drop(event: CdkDragDrop<string[]>) {
-    console.log(event)
-    moveItemInArray(this.boardArray, event.previousIndex, event.currentIndex);
-  }
-
-
-  getCord(index):Cord {
+  getCord(index): Cord {
 
     let row = Math.floor(index / 8)
-    let col = index-(row*8)
-    let requiredCord:Cord={col:col,row:row}
+    let col = index - (row * 8)
+    let requiredCord: Cord = {
+      col: col,
+      row: row
+    }
     return requiredCord
   }
 
-  // @HostListener('document:mouseup', ['$event'])
-  // mouseRelease(event){
-  //   console.log(event)
-  //   console.log(event.target.attributes)
-  //   console.log(event.target.attributes.id)
 
-  // }
-  
+
+  drop(event) {
+
+    event.container.element.nativeElement.style = "background:red !important;"
+    let requiredCord = this.getCord(event.container.id)
+    let data = {
+      requiredCord: requiredCord,
+      currentCord: this.knightCord
+    }
+    this.api.is_possible_move(data).subscribe(answer => {
+      this.knightCord.row = requiredCord.row
+      this.knightCord.col = requiredCord.col
+    }, (err) => {
+
+      alert(err.error)
+    })
+  }
+
+
 
 
 }
-
