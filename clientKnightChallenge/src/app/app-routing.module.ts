@@ -1,12 +1,20 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { BoardComponent } from './board/board.component';
+import {
+  NgModule
+} from '@angular/core';
+import {
+  Routes,
+  RouterModule
+} from '@angular/router';
+import {
+  BoardComponent
+} from './board/board.component';
 
 
 
-const routes: Routes = [
-  {path:'',component:BoardComponent}
-];
+const routes: Routes = [{
+  path: '',
+  component: BoardComponent
+}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
@@ -19,4 +27,4 @@ export class AppRoutingModule {
 
 
 
- }
+}

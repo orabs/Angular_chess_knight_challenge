@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --host=0.0.0.0 --disable-host-check",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -18,7 +18,7 @@
     "@angular/core": "~7.0.0",
     "@angular/forms": "~7.0.0",
     "@angular/http": "~7.0.0",
-    "@angular/material": "^9.0.1",
+    "@angular/material": "^7.0.0",
     "@angular/platform-browser": "~7.0.0",
     "@angular/platform-browser-dynamic": "~7.0.0",
     "@angular/router": "~7.0.0",
@@ -46,7 +46,6 @@
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "node-sass": "~4.9.3",
-
     "tslint": "~5.11.0",
     "typescript": "~3.1.6"
   }

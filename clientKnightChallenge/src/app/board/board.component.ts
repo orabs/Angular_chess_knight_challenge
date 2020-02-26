@@ -3,14 +3,6 @@ import {
   OnInit,
 } from '@angular/core';
 import {
-  CdkDrag,
-  CdkDropList,
-  moveItemInArray,
-  CdkDropListContainer,
-  CdkDropListGroup,
-  CdkDragSortEvent
-} from '@angular/cdk/drag-drop';
-import {
   Cord
 } from 'src/Cord';
 import {
@@ -26,6 +18,8 @@ export class BoardComponent implements OnInit {
 
   public items = Array(64).fill(0)
 
+
+  isAlert=false
   knightCord: Cord = {
     col: 2,
     row: 3
@@ -65,6 +59,8 @@ export class BoardComponent implements OnInit {
     return requiredCord
   }
 
+  
+
 
 
   drop(event) {
@@ -79,8 +75,14 @@ export class BoardComponent implements OnInit {
       this.knightCord.row = requiredCord.row
       this.knightCord.col = requiredCord.col
     }, (err) => {
-
-      alert(err.error)
+      console.log(err)
+      if (err.status==404){
+        this.isAlert=true
+        setTimeout(()=>{this.isAlert=false},4000)
+      }
+      else {
+        alert("Something went wrong!")
+      }
     })
   }
 

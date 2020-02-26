@@ -6,6 +6,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from 'src/services/api.service';
 import { BoardComponent } from './board/board.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -18,8 +20,9 @@ import { BoardComponent } from './board/board.component';
     BrowserModule,
     AppRoutingModule,
     DragDropModule,
-    HttpClientModule
-    
+    HttpClientModule,
+    MatSnackBarModule,
+    BrowserAnimationsModule
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]

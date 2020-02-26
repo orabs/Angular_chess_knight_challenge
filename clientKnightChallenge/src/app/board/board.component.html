@@ -1,16 +1,13 @@
-<!-- <h1>Drag&Drop Chess knight</h1> -->
-
-<div class="main-container" cdkDropListGroup >
-      <div id="{{i}}" cdkDropList *ngFor="let item of items;let i=index"
-        (cdkDropListDropped)="drop($event)" (CdkDropList)="dragStart($event)">
-    <div  cdkDrag
-      [className]="isBlack(i)? 'black col-box' :'white col-box'"
-    >
-     {{i}}
+<div class="main-container" cdkDropListGroup>
+  <div id="{{i}}" cdkDropList *ngFor="let item of items;let i=index" (cdkDropListDropped)="drop($event)"
+    (CdkDropList)="dragStart($event)">
+    <div cdkDrag [className]="isBlack(i)? 'black col-box' :'white col-box'">
+      {{i}}
     </div>
-        <img src="../../assets/images/3dKnight2.png" 
-      *ngIf="knightCord.col==getCord(i).col && knightCord.row==getCord(i).row"
-      cdkDrag class="knight" >
-  
+    <img src="../../assets/images/3dKnight2.png"
+      *ngIf="knightCord.col==getCord(i).col && knightCord.row==getCord(i).row" cdkDrag class="knight">
+
   </div>
 </div>
+
+<div *ngIf="isAlert" class="alert"><p class="alert-text">Wrong Move!</p></div>
